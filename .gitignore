@@ -12,7 +12,7 @@
 /build
 
 #env-vars
-/src/apis/ENV_VARS
+/src/apis/secrete.ts
 
 # misc
 .DS_Store
