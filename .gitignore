@@ -11,6 +11,9 @@
 # production
 /build
 
+#env-vars
+/src/apis/ENV_VARS.ts
+
 # misc
 .DS_Store
 .env.local
