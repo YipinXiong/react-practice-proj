@@ -1,14 +1,9 @@
 import React from 'react';
-import './App.css';
-import Accordion from './components/Accordion';
-
-const items = [{
-  title: 'What is react?',
-  content: 'React is a very popular frameworks'
-}];
+import './App.scss';
+import {Link} from 'react-router-dom';
 
 function App() {
-  return (<Accordion/>);
+  return (<Link to={'/login'}>Login</Link>);
 }
 
 export default App;
