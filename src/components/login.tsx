@@ -1,6 +1,5 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-
-type LoginFormEntries = 'password' | 'username' | 'orgCode';
+import {LoginFormEntries} from '../interfaces/interfaces.index';
 
 const Login = () => {
   const [currentInputs, setInputs] = useState({orgCode: '', username: '', password: ''});
