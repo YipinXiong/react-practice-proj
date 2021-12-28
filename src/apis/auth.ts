@@ -12,9 +12,11 @@ const AuthService = {
           console.log(error);
         });
   },
-  signout(callback: VoidFunction) {
+  signout(callback?: VoidFunction) {
     this.isAuthenticated = false;
-    setTimeout(callback, 100);
+    if (callback) {
+      setTimeout(callback, 100);
+    }
   },
 };
 

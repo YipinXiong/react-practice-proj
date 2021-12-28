@@ -5,21 +5,35 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Login from './components/login';
+import {AuthProvider} from './hooks/auth';
+import axios from 'axios';
+import {ausmed_base_url} from './apis/secrete';
+
+function setupGlobalAxiosTokenAndBaseUrl():void {
+  axios.defaults.baseURL = ausmed_base_url;
+  if (localStorage.getItem('auth_token')) {
+    axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('auth_token') as string;
+  }
+}
+
+setupGlobalAxiosTokenAndBaseUrl();
 
 ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
-        <Routes>
-          <Route path={'/'} element={<App/>}>
-          </Route>
-          <Route path={'/login'} element={<Login/>}/>
-          <Route path="*" element={
-            <main style={{padding: "1rem"}}>
-              <p>There is nothing here!</p>
-            </main>
-          }
-          />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path={'/'} element={<App/>}>
+            </Route>
+            <Route path={'/login'} element={<Login/>}/>
+            <Route path="*" element={
+              <main style={{padding: "1rem"}}>
+                <p>There is nothing here!</p>
+              </main>
+            }
+            />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')

@@ -310,4 +310,10 @@ export interface InitPayload {
   token: string;
 }
 
+export interface AuthContextType {
+  initPayload: InitPayload | null;
+  signin: (loginForm: ILoginFormData, callBack?: VoidFunction) => void;
+  signout: (callback?: VoidFunction) => void;
+}
+
 export type LoginFormEntries = keyof ILoginFormData;

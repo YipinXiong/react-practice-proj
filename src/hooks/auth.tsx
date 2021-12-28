@@ -1,9 +1,24 @@
 import React from 'react';
-import { InitPayload} from '../interfaces/interfaces.index';
+import {AuthContextType, ILoginFormData, InitPayload} from '../interfaces/interfaces.index';
+import {AuthService} from '../apis/auth';
 
-export const AuthContext = React.createContext<InitPayload | null>(null);
+export const AuthContext = React.createContext<AuthContextType | null>(null);
+
+export function useAuth() {
+  return React.useContext(AuthContext);
+}
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [initPayload, setInitPayload] = React.useState<InitPayload | null>(null);
-  return <AuthContext.Provider value={initPayload}>{children}</AuthContext.Provider>;
+  const signin = (loginForm: ILoginFormData, callBack?: VoidFunction) => {
+    AuthService.signin(loginForm).then((initPayload) => {
+      setInitPayload(initPayload ? initPayload : null);
+      callBack && callBack();
+    })
+  };
+  const signout = () => {
+    AuthService.signout();
+  };
+  const value: AuthContextType = {initPayload, signout, signin};
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
