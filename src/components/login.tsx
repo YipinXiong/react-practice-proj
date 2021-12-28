@@ -1,11 +1,14 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import {LoginFormEntries} from '../interfaces/interfaces.index';
+import {ILoginFormData, LoginFormEntries} from '../interfaces/interfaces.index';
+import {AuthService} from '../apis/auth';
 
 const Login = () => {
-  const [currentInputs, setInputs] = useState({orgCode: '', username: '', password: ''});
+  const [currentInputs, setInputs] = useState<ILoginFormData>({orgCode: '', username: '', password: ''});
   const onSubmitLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('event', currentInputs);
+    AuthService.signin(currentInputs).then((initPayload) => {
+      console.log('initPayload', initPayload);
+    });
   };
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputs(((prevState) => {
