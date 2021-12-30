@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const cacheToken = localStorage.getItem(AUTH_TOKEN_KEY);
     const cacheOrgCode = localStorage.getItem(CACHE_ORG_CODE_KEY);
     if (cacheToken && cacheOrgCode) {
-      AuthService.renewToken(cacheOrgCode, cacheToken).then((initPayload) => {
+      AuthService.renewToken(cacheOrgCode).then((initPayload) => {
         setInitPayload(initPayload ? initPayload : null);
       });
     }

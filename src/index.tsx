@@ -8,11 +8,12 @@ import Login from './components/login';
 import {AuthProvider, RequireAuth} from './hooks/auth';
 import axios from 'axios';
 import {ausmed_base_url} from './apis/secrete';
+import {AUTH_TOKEN_KEY} from './apis/auth';
 
 function setupGlobalAxiosTokenAndBaseUrl(): void {
   axios.defaults.baseURL = ausmed_base_url;
-  if (localStorage.getItem('auth_token')) {
-    axios.defaults.headers.common['x-auth-token'] = localStorage.getItem('auth_token') as string;
+  if (localStorage.getItem(AUTH_TOKEN_KEY)) {
+    axios.defaults.headers.common['x-auth-token'] = localStorage.getItem(AUTH_TOKEN_KEY) as string;
   }
 }
 

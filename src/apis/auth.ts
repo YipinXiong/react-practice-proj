@@ -10,6 +10,7 @@ const AuthService = {
         .then(({data}) => {
           localStorage.setItem(AUTH_TOKEN_KEY, data.token);
           localStorage.setItem(CACHE_ORG_CODE_KEY, orgCode);
+          axios.defaults.headers.common[AUTH_TOKEN_KEY] = data.token;
           return data;
         })
         .catch(function (error) {
@@ -21,8 +22,7 @@ const AuthService = {
       setTimeout(callback, 100);
     }
   },
-  renewToken(orgCode: string, token: string): Promise<void | InitPayload> {
-    axios.defaults.headers.common['x-auth-token'] = token;
+  renewToken(orgCode: string): Promise<void | InitPayload> {
     return axios.get<InitPayload>(`/account/orgs/byCode/${orgCode}/renewToken`)
         .then(({data}) => data)
         .catch(function (error) {
