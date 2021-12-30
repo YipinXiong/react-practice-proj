@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {AuthContextType, ILoginFormData, InitPayload} from '../interfaces/interfaces.index';
-import {AuthService} from '../apis/auth';
+import {AUTH_TOKEN_KEY, AuthService, CACHE_ORG_CODE_KEY} from '../apis/auth';
 import {Navigate, useLocation} from 'react-router-dom';
 
 export const AuthContext = React.createContext<AuthContextType | null>(null);
@@ -11,6 +11,15 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [initPayload, setInitPayload] = React.useState<InitPayload | null>(null);
+  useEffect(() => {
+    const cacheToken = localStorage.getItem(AUTH_TOKEN_KEY);
+    const cacheOrgCode = localStorage.getItem(CACHE_ORG_CODE_KEY);
+    if (cacheToken && cacheOrgCode) {
+      AuthService.renewToken(cacheOrgCode, cacheToken).then((initPayload) => {
+        setInitPayload(initPayload ? initPayload : null);
+      });
+    }
+  }, []);
   const signin = (loginForm: ILoginFormData, callBack?: VoidFunction) => {
     AuthService.signin(loginForm).then((initPayload) => {
       setInitPayload(initPayload ? initPayload : null);
@@ -20,6 +29,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signout = () => {
     AuthService.signout();
   };
+
   const value: AuthContextType = {initPayload, signout, signin};
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -28,14 +38,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 export function RequireAuth({ children }: { children: JSX.Element }) {
   const auth = useAuth();
   const location = useLocation();
-
-  if (!auth?.initPayload?.token) {
-    // Redirect them to the /login page, but save the current location they were
-    // trying to go to when they were redirected. This allows us to send them
-    // along to that page after they login, which is a nicer user experience
-    // than dropping them off on the home page.
+  const cacheToken = localStorage.getItem(AUTH_TOKEN_KEY);
+  const cacheOrgCode = localStorage.getItem(CACHE_ORG_CODE_KEY);
+  if (!auth?.initPayload && !cacheOrgCode && !cacheToken) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-
   return children;
 }
