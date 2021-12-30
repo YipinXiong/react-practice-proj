@@ -1,13 +1,21 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {ILoginFormData, LoginFormEntries} from '../interfaces/interfaces.index';
 import {useAuth} from '../hooks/auth';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 const Login = () => {
   const [currentLoginForm, setLoginFormInputs] = useState<ILoginFormData>({orgCode: '', username: '', password: ''});
   const auth = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const fromPage = location.state?.from?.pathname || "/";
   const onSubmitLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    auth?.signin(currentLoginForm);
+    auth?.signin(currentLoginForm, () => {
+      navigate(fromPage, { replace: true });
+    });
   };
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLoginFormInputs(((prevState) => {
