@@ -15,6 +15,7 @@ import YourLibrary from './components/YourLibrary';
 import Reports from './components/Reports';
 import Settings from './components/Settings';
 import AusmedLibrary from './components/AusmedLibrary';
+import Dashboard from './components/Dashboard';
 
 function setupGlobalAxiosTokenAndBaseUrl(): void {
   axios.defaults.baseURL = ausmed_base_url;
@@ -33,6 +34,7 @@ ReactDOM.render(
             <Route path="/login" element={<Login/>}/>
             <Route path="/" element={<RequireAuth><App/>
             </RequireAuth>}>
+              <Route index element={<Dashboard/>}/>
               <Route path="compliance-plan" element={<CompliancePlan/>}/>
               <Route path="admin-staff" element={<AdminStaff/>}/>
               <Route path="your-library" element={<YourLibrary/>}/>
