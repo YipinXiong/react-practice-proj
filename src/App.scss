@@ -1,0 +1,22 @@
+$global-header-height: 68px;
+$global-nav-bar-width: 150px;
+
+
+.global-header {
+  display: flex;
+  min-height: $global-header-height;
+}
+
+.global-nav-bar {
+  width: $global-nav-bar-width;
+}
+
+.global-content-wrapper {
+  flex: 1;
+  overflow: auto;
+}
+
+.global-content-area {
+  flex: 1;
+  overflow: auto;
+}

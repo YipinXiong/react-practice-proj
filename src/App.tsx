@@ -7,15 +7,15 @@ import {Outlet} from 'react-router-dom';
 
 function App() {
   return (
-      <div className="container-fluid">
-        <div className="row">
+      <div className="d-flex flex-column overflow-hidden" style={{height: '100vh'}}>
+        <div className="global-header">
           <DashboardHeader/>
         </div>
-        <div className="row">
-          <div className="col-md-3 g-0">
+        <div className="d-flex position-relative global-content-wrapper">
+          <div className="global-nav-bar">
             <DashboardNavBar/>
           </div>
-          <div className="col-12 col-md-9">
+          <div className="global-content-area">
             <Outlet/>
           </div>
         </div>

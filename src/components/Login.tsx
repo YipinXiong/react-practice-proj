@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {ILoginFormData, LoginFormEntries} from '../interfaces/interfaces.index';
-import {useAuth} from '../hooks/auth';
+import {useAuth} from '../hooks/auth.hook';
 import {Location, useLocation, useNavigate} from 'react-router-dom';
 
 const Login = () => {
@@ -8,12 +8,12 @@ const Login = () => {
   const auth = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const castedLocationState = location.state as {from: Location};
+  const castedLocationState = location.state as { from: Location };
   const fromPage = castedLocationState?.from?.pathname || "/";
   const onSubmitLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     auth?.signin(currentLoginForm, () => {
-      navigate(fromPage, { replace: true });
+      navigate(fromPage, {replace: true});
     });
   };
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,15 +28,18 @@ const Login = () => {
       <form className="d-flex flex-column p-5" onSubmit={onSubmitLogin}>
         <div className="mb-3">
           <label htmlFor="orgCode" className="form-label">Org Code</label>
-          <input onChange={onInputChange} value={currentLoginForm.orgCode} type="text" name="orgCode" className="form-control" id="orgCode" aria-describedby="orgCode" />
+          <input onChange={onInputChange} value={currentLoginForm.orgCode} type="text" name="orgCode"
+                 className="form-control" id="orgCode" aria-describedby="orgCode"/>
         </div>
         <div className="mb-3">
           <label htmlFor="username" className="form-label">Username</label>
-          <input onChange={onInputChange} value={currentLoginForm.username} type="text" name="username" className="form-control" id="username" aria-describedby="username" />
+          <input onChange={onInputChange} value={currentLoginForm.username} type="text" name="username"
+                 className="form-control" id="username" aria-describedby="username"/>
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-          <input onChange={onInputChange} value={currentLoginForm.password} type="password" name="password" className="form-control" id="exampleInputPassword1"/>
+          <input onChange={onInputChange} value={currentLoginForm.password} type="password" name="password"
+                 className="form-control" id="exampleInputPassword1"/>
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>

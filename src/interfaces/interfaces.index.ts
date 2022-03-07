@@ -3,6 +3,7 @@ export interface ILoginFormData {
   password: string;
   username: string;
 }
+
 export interface LoginInfo {
   providerID: string;
   providerKey: string;
@@ -153,6 +154,8 @@ export interface Profile {
   lastName: string;
 }
 
+export type OrgUserStatus = 'Active' | 'Pending' | 'Rejected' | 'In-active' | 'Refused' | 'Applied';
+
 export interface IOrgUser {
   orgUserID: string;
   userID: string;
@@ -164,7 +167,7 @@ export interface IOrgUser {
   teams: string[];
   managedTeams: string[];
   jobRoleTakens: JobRoleTaken[];
-  status: string;
+  status: OrgUserStatus;
   startDate: Date;
   orgMobile: string;
   orgUserDetail: OrgUserDetail;
