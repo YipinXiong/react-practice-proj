@@ -1,4 +1,4 @@
-import {action, computed, makeObservable, observable, runInAction} from "mobx"
+import {action, makeObservable, observable, runInAction} from "mobx"
 import {TeamModel} from '../interfaces/interfaces.index';
 import {RootStore} from './root.store';
 import {TransportInstances} from '../apis/api-index';
@@ -15,21 +15,10 @@ export default class TeamsStore {
       rootStore: false,
       fetchAllTeams: action,
       httpClients: false,
-      managedTeams: computed,
     })
     this.httpClients = httpClients;
     this.rootStore = _rootStore;
     this.fetchAllTeams();
-  }
-
-  get managedTeams() {
-    if (this.rootStore.signInUserStore.orgUser?.managedTeams) {
-      if (this.rootStore.signInUserStore.orgUser.isManager) {
-        return this.allTeams;
-      }
-      return this.allTeams.filter(rawTeam => this.rootStore.signInUserStore.orgUser?.managedTeams.includes(rawTeam.teamID));
-    }
-    return [];
   }
 
   async fetchAllTeams() {

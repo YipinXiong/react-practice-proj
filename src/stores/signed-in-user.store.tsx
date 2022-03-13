@@ -1,5 +1,5 @@
 import {CurrentContract, InitPayload, IOrganisation, IOrgUser, User} from '../interfaces/interfaces.index';
-import {action, makeObservable, observable} from 'mobx';
+import {action, computed, makeObservable, observable} from 'mobx';
 import {RootStore} from './root.store';
 import {TransportInstances} from '../apis/api-index';
 
@@ -20,12 +20,23 @@ export default class SignedInUserStore {
           currentContract: observable,
           token: observable,
           setInitPayload: action,
+          managedTeams: computed,
           rootStore: false,
           httpClients: false,
         }
     )
     this.httpClients = httpClients;
     this.rootStore = _rootStore;
+  }
+
+  get managedTeams() {
+    if (Array.isArray(this.rootStore.teamsStore?.allTeams)) {
+      if (this.orgUser?.isManager) {
+        return this.rootStore.teamsStore.allTeams;
+      }
+      return this.rootStore.teamsStore.allTeams.filter(rawTeam => this.orgUser?.managedTeams.includes(rawTeam.teamID));
+    }
+    return [];
   }
 
   setInitPayload(initPayload: InitPayload) {
