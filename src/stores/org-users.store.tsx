@@ -1,4 +1,4 @@
-import {action, computed, makeObservable, observable} from "mobx"
+import {action, computed, makeObservable, observable, runInAction} from "mobx"
 import {IOrgUser} from '../interfaces/interfaces.index';
 import RootStore from './root.store';
 import {TransportInstances} from '../apis/api-index';
@@ -41,7 +41,10 @@ export default class OrgUsersStore {
 
   async fetchAllOrgUsers() {
     if (this.rootStore.signInUserStore.token) {
-      this.allOrgUsers = await singletonOrgUserService.fetchOrgUsers();
+      const allOrgUsers = await singletonOrgUserService.fetchOrgUsers();
+      runInAction(() => {
+        this.allOrgUsers = allOrgUsers;
+      })
     }
   }
 }

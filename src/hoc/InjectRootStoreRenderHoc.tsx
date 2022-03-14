@@ -3,7 +3,7 @@ import {Fragment} from 'react';
 import {useRootStore} from '../hooks/app-root-store.store';
 import RootStore from '@root-store';
 
-const InjectRootStoreHoc = (props: { renderWithStore: (rootStore: RootStore) => React.ReactElement }) => {
+const InjectRootStoreRenderHoc = (props: { renderWithStore: (rootStore: RootStore) => React.ReactElement }) => {
   const rootStore = useRootStore();
   return (
       <Fragment>
@@ -11,4 +11,5 @@ const InjectRootStoreHoc = (props: { renderWithStore: (rootStore: RootStore) => 
       </Fragment>
   );
 };
-export default InjectRootStoreHoc;
+
+export default InjectRootStoreRenderHoc;

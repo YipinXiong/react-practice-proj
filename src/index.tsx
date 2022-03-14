@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {BrowserRouter, Outlet, Route, Routes} from 'react-router-dom';
 import Login from './components/Login';
 import {AuthProvider, RequireAuth} from './hooks/auth.hook';
 import CompliancePlan from './components/CompliancePlan';
@@ -14,8 +14,10 @@ import Settings from './components/Settings';
 import AusmedLibrary from './components/AusmedLibrary';
 import Dashboard from './components/Dashboard';
 import {RootStoreProvider} from './hooks/app-root-store.store';
+import JobRolesList from './components/JobRolesList';
 import TeamsList from './components/TeamsList';
-import InjectRootStoreHoc from './hoc/InjectRootStoreHoc';
+import InjectRootStoreRenderHoc from './hoc/InjectRootStoreRenderHoc';
+import ConnectToStoreTeamDetailsPage from './components/TeamDetailsPage';
 
 
 ReactDOM.render(
@@ -30,9 +32,17 @@ ReactDOM.render(
                 <Route index element={<Dashboard/>}/>
                 <Route path="compliance-plan" element={<CompliancePlan/>}/>
                 <Route path="admin-staff"
-                       element={<InjectRootStoreHoc renderWithStore={(store) => <AdminStaff rootStore={store}/>}/>}/>
-                <Route path="teams"
-                       element={<InjectRootStoreHoc renderWithStore={(store) => <TeamsList rootStore={store}/>}/>}>
+                       element={<InjectRootStoreRenderHoc
+                           renderWithStore={(store) => <AdminStaff rootStore={store}/>}/>}/>
+                <Route path="teams" element={<Outlet/>}>
+                  <Route index
+                         element={<InjectRootStoreRenderHoc
+                             renderWithStore={(store) => <TeamsList rootStore={store}/>}/>}/>
+                  <Route path=":teamID" element={<ConnectToStoreTeamDetailsPage/>}/>
+                </Route>
+                <Route path="job-roles"
+                       element={<InjectRootStoreRenderHoc
+                           renderWithStore={(store) => <JobRolesList rootStore={store}/>}/>}>
                 </Route>
                 <Route path="your-library" element={<YourLibrary/>}/>
                 <Route path="ausmed-library" element={<AusmedLibrary/>}/>
