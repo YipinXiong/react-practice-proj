@@ -6,6 +6,12 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": "src",
+    "paths": {
+      "@root-store": [
+        "./stores/root.store"
+      ]
+    },
     "useDefineForClassFields": true,
     "allowJs": true,
     "skipLibCheck": true,

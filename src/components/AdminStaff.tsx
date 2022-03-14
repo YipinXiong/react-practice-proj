@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
-import {useRootStore} from '../hooks/app-root-store.store';
 import {observer} from 'mobx-react';
-import {RootStore} from '../stores/root.store';
+import RootStore from '../stores/root.store';
 
 const AdminStaffList = observer<FC<{ rootStore: RootStore }>>(({rootStore}) => {
   return <div>
@@ -10,9 +9,4 @@ const AdminStaffList = observer<FC<{ rootStore: RootStore }>>(({rootStore}) => {
   </div>
 })
 
-const AdminStaff = () => {
-  const rootStore = useRootStore();
-  return <AdminStaffList rootStore={rootStore}/>;
-};
-
-export default AdminStaff;
+export default AdminStaffList;

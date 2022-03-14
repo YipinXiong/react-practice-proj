@@ -1,5 +1,5 @@
 import React from 'react';
-import {RootStore} from '../stores/root.store';
+import RootStore from '../stores/root.store';
 import accountApiInstance from '../apis/account-api-instance';
 import resourceAPIInstance from '../apis/resource-api-instance';
 

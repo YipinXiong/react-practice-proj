@@ -1,6 +1,6 @@
 import {action, makeObservable, observable, runInAction} from "mobx"
 import {JobRoleModel} from '../interfaces/interfaces.index';
-import {RootStore} from './root.store';
+import RootStore from './root.store';
 import {TransportInstances} from '../apis/api-index';
 import {CACHE_ORG_ID_KEY} from '../apis/api-const-tokens';
 

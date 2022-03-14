@@ -14,6 +14,8 @@ import Settings from './components/Settings';
 import AusmedLibrary from './components/AusmedLibrary';
 import Dashboard from './components/Dashboard';
 import {RootStoreProvider} from './hooks/app-root-store.store';
+import TeamsList from './components/TeamsList';
+import InjectRootStoreHoc from './hoc/InjectRootStoreHoc';
 
 
 ReactDOM.render(
@@ -27,7 +29,11 @@ ReactDOM.render(
               </RequireAuth>}>
                 <Route index element={<Dashboard/>}/>
                 <Route path="compliance-plan" element={<CompliancePlan/>}/>
-                <Route path="admin-staff" element={<AdminStaff/>}/>
+                <Route path="admin-staff"
+                       element={<InjectRootStoreHoc renderWithStore={(store) => <AdminStaff rootStore={store}/>}/>}/>
+                <Route path="teams"
+                       element={<InjectRootStoreHoc renderWithStore={(store) => <TeamsList rootStore={store}/>}/>}>
+                </Route>
                 <Route path="your-library" element={<YourLibrary/>}/>
                 <Route path="ausmed-library" element={<AusmedLibrary/>}/>
                 <Route path="reports" element={<Reports/>}/>

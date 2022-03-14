@@ -5,7 +5,7 @@ import {TransportInstances} from '../apis/api-index';
 import TeamsStore from './teams.store';
 import JobRolesStore from './job-roles.store';
 
-export class RootStore {
+export default class RootStore {
   orgUserStore: OrgUsersStore;
   signInUserStore: SignedInUserStore;
   teamsStore: TeamsStore;

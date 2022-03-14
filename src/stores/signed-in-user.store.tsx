@@ -1,6 +1,6 @@
 import {CurrentContract, InitPayload, IOrganisation, IOrgUser, User} from '../interfaces/interfaces.index';
 import {action, computed, makeObservable, observable} from 'mobx';
-import {RootStore} from './root.store';
+import RootStore from './root.store';
 import {TransportInstances} from '../apis/api-index';
 
 export default class SignedInUserStore {

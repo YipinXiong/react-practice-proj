@@ -13,6 +13,7 @@ interface SidebarEntry extends BasicSidebarEntry {
 const DashboardNavBar = () => {
   const sidebarEntries: SidebarEntry[] = [{displayName: 'dashboard', route: '/'},
     {displayName: 'Administration', route: 'admin-staff'},
+    {displayName: 'Teams', route: 'teams'},
     {displayName: 'Compliance', route: 'compliance-plan'},
     {displayName: 'Your Library', route: 'your-library'},
     {displayName: 'Ausmed Library', route: 'ausmed-library'},

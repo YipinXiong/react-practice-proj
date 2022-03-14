@@ -1,7 +1,6 @@
 import {action, computed, makeObservable, observable} from "mobx"
 import {IOrgUser} from '../interfaces/interfaces.index';
-import React from 'react';
-import {RootStore} from './root.store';
+import RootStore from './root.store';
 import {TransportInstances} from '../apis/api-index';
 import singletonOrgUserService from '../apis/org-user.service';
 
