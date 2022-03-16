@@ -15,6 +15,7 @@ export default class TeamsStore {
       rootStore: false,
       fetchAllTeams: action,
       httpClients: false,
+      getActiveOrgUserNumByID: false,
     })
     this.httpClients = httpClients;
     this.rootStore = _rootStore;
@@ -32,5 +33,13 @@ export default class TeamsStore {
         this.allTeams = allRawTeams;
       })
     }
+  }
+
+  getActiveOrgUserNumByID(teamID: string): number {
+    if (!teamID) {
+      console.error('teamID is empty!');
+      return 0;
+    }
+    return this.rootStore.orgUserStore.activeOrgUsers?.filter(activeOrgUser => activeOrgUser.teams?.includes(teamID))?.length ?? 0;
   }
 }

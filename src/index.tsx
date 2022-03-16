@@ -15,7 +15,7 @@ import AusmedLibrary from './components/AusmedLibrary';
 import Dashboard from './components/Dashboard';
 import {RootStoreProvider} from './hooks/app-root-store.store';
 import JobRolesList from './components/JobRolesList';
-import TeamsList from './components/TeamsList';
+import ConnectedToStoreTeamList from './components/TeamsList';
 import InjectRootStoreRenderHoc from './hoc/InjectRootStoreRenderHoc';
 import ConnectToStoreTeamDetailsPage from './components/TeamDetailsPage';
 
@@ -35,9 +35,7 @@ ReactDOM.render(
                        element={<InjectRootStoreRenderHoc
                            renderWithStore={(store) => <AdminStaff rootStore={store}/>}/>}/>
                 <Route path="teams" element={<Outlet/>}>
-                  <Route index
-                         element={<InjectRootStoreRenderHoc
-                             renderWithStore={(store) => <TeamsList rootStore={store}/>}/>}/>
+                  <Route index element={<ConnectedToStoreTeamList/>}/>
                   <Route path=":teamID" element={<ConnectToStoreTeamDetailsPage/>}/>
                 </Route>
                 <Route path="job-roles"
