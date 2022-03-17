@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {NavLink} from 'react-router-dom';
 
 interface BasicSidebarEntry {
@@ -10,7 +10,11 @@ interface SidebarEntry extends BasicSidebarEntry {
   subEntries?: BasicSidebarEntry[];
 }
 
-const DashboardNavBar = () => {
+interface Props {
+  setHideHamburgerMenu: (val: boolean) => void;
+}
+
+const DashboardNavBar: FC<Props> = ({setHideHamburgerMenu}) => {
   const sidebarEntries: SidebarEntry[] = [{displayName: 'dashboard', route: '/'},
     {displayName: 'Administration', route: 'admin-staff'},
     {displayName: 'Teams', route: 'teams'},
@@ -25,7 +29,7 @@ const DashboardNavBar = () => {
         <ul>
           {sidebarEntries.map((entry) =>
               <li key={entry.route}>
-                <NavLink to={entry.route}>
+                <NavLink to={entry.route} onClick={() => setHideHamburgerMenu(true)}>
                   {entry.displayName}
                 </NavLink>
               </li>

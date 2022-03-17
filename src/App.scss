@@ -12,6 +12,21 @@ $global-nav-bar-width: 150px;
 .global-nav-bar {
   width: $global-nav-bar-width;
   border-right: 1px $gray-300 solid;
+
+  &.show-hamburger-menu {
+    @include media-breakpoint-down(md) {
+      display: block;
+      width: 100vw;
+      opacity: 1;
+    }
+  }
+
+  &.hide-hamburger-menu {
+    @include media-breakpoint-down(md) {
+      display: none;
+      opacity: 0;
+    }
+  }
 }
 
 .global-content-wrapper {
