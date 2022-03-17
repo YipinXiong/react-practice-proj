@@ -12,7 +12,7 @@ function App() {
           <DashboardHeader/>
         </div>
         <div className="d-flex position-relative global-content-wrapper">
-          <div className="global-nav-bar">
+          <div className="global-nav-bar d-none d-md-block">
             <DashboardNavBar/>
           </div>
           <div className="global-content-area">

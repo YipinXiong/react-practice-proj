@@ -11,6 +11,7 @@ $global-nav-bar-width: 150px;
 
 .global-nav-bar {
   width: $global-nav-bar-width;
+  border-right: 1px $gray-300 solid;
 }
 
 .global-content-wrapper {

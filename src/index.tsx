@@ -7,7 +7,7 @@ import {BrowserRouter, Outlet, Route, Routes} from 'react-router-dom';
 import Login from './components/Login';
 import {AuthProvider, RequireAuth} from './hooks/auth.hook';
 import CompliancePlan from './components/CompliancePlan';
-import AdminStaff from './components/AdminStaff';
+import ConnectToStoreAdminStaffList from './components/AdminStaff';
 import YourLibrary from './components/YourLibrary';
 import Reports from './components/Reports';
 import Settings from './components/Settings';
@@ -31,9 +31,7 @@ ReactDOM.render(
               </RequireAuth>}>
                 <Route index element={<Dashboard/>}/>
                 <Route path="compliance-plan" element={<CompliancePlan/>}/>
-                <Route path="admin-staff"
-                       element={<InjectRootStoreRenderHoc
-                           renderWithStore={(store) => <AdminStaff rootStore={store}/>}/>}/>
+                <Route path="admin-staff" element={<ConnectToStoreAdminStaffList/>}/>
                 <Route path="teams" element={<Outlet/>}>
                   <Route index element={<ConnectedToStoreTeamList/>}/>
                   <Route path=":teamID" element={<ConnectToStoreTeamDetailsPage/>}/>

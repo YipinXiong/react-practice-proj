@@ -24,7 +24,7 @@ const TeamList = observer<FC<{ rootStore: RootStore }>>(({rootStore}) => {
                  onChange={(e) => setSearchTeam(e.target.value)}
                  id="exampleFormControlInput1" placeholder="Search Team Names"/>
         </div>
-        {rootStore.teamsStore.loading ? <div className="text-black text-warning">Loading Teams</div> :
+        {rootStore.teamsStore.loading ? <div className="text-black text-warning px-2">Loading Teams</div> :
             <div className="grid-thirds gap-2 p-2">{renderedTeams.map((team) =>
                 <Link key={team.teamID} className="d-block card p-4 text-decoration-none" to={`${team.teamID}`}>
                   <div className="fw-bold">{team.name}</div>
