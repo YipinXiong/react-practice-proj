@@ -10,7 +10,7 @@ const TeamList = observer<FC<{ rootStore: RootStore }>>(({rootStore}) => {
   const [renderedTeams, setRenderedTeams] = useState<TeamModel[]>(rootStore.teamsStore?.allTeams || []);
   useEffect(() => {
     const prevChangeTimeoutFunction = setTimeout(() => {
-      setRenderedTeams(rootStore.teamsStore?.allTeams.filter((team) => team.name?.toLowerCase().includes(searchTerm.toLowerCase())))
+      setRenderedTeams(rootStore.teamsStore?.allTeams.filter((team) => team.name?.toLowerCase().includes(searchTerm.toLowerCase())));
     }, 500);
     return () => {
       if (prevChangeTimeoutFunction) clearTimeout(prevChangeTimeoutFunction);
@@ -18,7 +18,7 @@ const TeamList = observer<FC<{ rootStore: RootStore }>>(({rootStore}) => {
   }, [searchTerm, rootStore.teamsStore.allTeams]);
   return (
       <>
-        <div className="mb-3 px-2">
+        <div className="mb-3 px-2 position-sticky bg-white" style={{zIndex: 10, top: 0}}>
           <label htmlFor="exampleFormControlInput1" className="form-label">Search Team Name</label>
           <input type="search" className="form-control" value={searchTerm}
                  onChange={(e) => setSearchTeam(e.target.value)}
