@@ -8,12 +8,14 @@ export default class TeamsStore {
   allTeams: TeamModel[] = [];
   rootStore: RootStore;
   httpClients: TransportInstances;
+  loading = true;
 
   constructor(_rootStore: RootStore, httpClients: TransportInstances) {
     makeObservable(this, {
       allTeams: observable,
       rootStore: false,
       fetchAllTeams: action,
+      loading: observable,
       httpClients: false,
       getActiveOrgUserNumByID: false,
     })
@@ -23,6 +25,7 @@ export default class TeamsStore {
   }
 
   async fetchAllTeams() {
+    this.loading = true;
     if (this.rootStore.signInUserStore.token) {
       const orgID = localStorage.getItem(CACHE_ORG_ID_KEY);
       const allRawTeams = await this.httpClients.accountHttpClient.get<TeamModel[]>(`/orgs/${orgID}/teams`).then(({data}) => data, (error) => {
@@ -30,6 +33,7 @@ export default class TeamsStore {
         return [];
       });
       runInAction(() => {
+        this.loading = false;
         this.allTeams = allRawTeams;
       })
     }
