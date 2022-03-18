@@ -14,7 +14,7 @@ function App() {
         </div>
         <div className="d-flex position-relative global-content-wrapper">
           <div
-              className={`global-nav-bar d-md-block ${hideHamburgerMenu ? 'hide-hamburger-menu' : 'show-hamburger-menu'}`}>
+              className={`global-nav-bar d-flex ${hideHamburgerMenu ? 'hide-hamburger-menu' : 'show-hamburger-menu'}`}>
             <DashboardNavBar setHideHamburgerMenu={setHideHamburgerMenu}/>
           </div>
           <div className="global-content-area">
