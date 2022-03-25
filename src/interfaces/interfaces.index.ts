@@ -4,6 +4,43 @@ export interface ILoginFormData {
   username: string;
 }
 
+export interface IMtPlanStat {
+  plan: Plan;
+  complianceRate: number;
+  compliancePercent: string;
+  achievementRate: number;
+  achievementPercent: string;
+  scheduleNum: number;
+  activeEnrolledNum: number;
+  enrolledNum: number;
+  totalEnrolledNum: number;
+  jobRoles?: JobRoleModel[];
+  relatedJobRoles?: JobRoleModel[] | null;
+  teamStat: TeamStat;
+  unfinishedScheduleNum: number;
+}
+
+export interface Plan {
+  mtPlanID: string;
+  orgID: string;
+  status: string;
+  startDate: string;
+  startDateUTC: string;
+  title: string;
+  description: string;
+}
+
+export interface TeamStat {
+  complianceRate: number;
+  compliancePercent: string;
+  achievementRate: number;
+  achievementPercent: string;
+  activeEnrolledNum: number;
+  enrolledNum: number;
+  totalEnrolledNum: number;
+  unfinishedScheduleNum: number;
+}
+
 export interface LoginInfo {
   providerID: string;
   providerKey: string;

@@ -1,11 +1,57 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
+import accountApiInstance from '../apis/account-api-instance';
+import {CACHE_ORG_ID_KEY} from '../apis/api-const-tokens';
+import {IMtPlanStat} from '../interfaces/interfaces.index';
+import RootStore from '@root-store';
 
-const Dashboard = () => {
-  return (
-      <div>
-        here is dashboard
-      </div>
-  );
-};
+type Props = { rootStore: RootStore }
+
+interface IDashboardState {
+  mtPlanStats: IMtPlanStat[];
+  isLoading: boolean;
+}
+
+class Dashboard extends PureComponent<Props, IDashboardState> {
+  constructor(props: { rootStore: RootStore }) {
+    super(props);
+    this.state = {mtPlanStats: [], isLoading: true}
+  }
+
+  componentDidMount() {
+    const orgID = localStorage.getItem(CACHE_ORG_ID_KEY);
+    accountApiInstance.get<IMtPlanStat[]>(`/orgs/${orgID}/mtPlanStats`)
+        .then(({data: mtPlansStats}) => {
+          this.setState({mtPlanStats: mtPlansStats, isLoading: false});
+        });
+  }
+
+  shouldIBindThisInTypeScriptInReact(planStat: IMtPlanStat) {
+    /* Playground */
+    const mappedJobRoles = planStat.jobRoles?.map(({jobRoleID}) => {
+      return this.props.rootStore.jobRolesStore.allJobRoles.find((storeJobRole) => jobRoleID === storeJobRole.jobRoleID)?.title;
+    });
+    console.log('jobRoles within the plan', mappedJobRoles);
+  }
+
+  render() {
+    return (
+        <>
+          <div>
+            here is dashboard
+          </div>
+          {(this.state.isLoading || this.props.rootStore.jobRolesStore.loading) ?
+              <div className="text-danger fw-bold">Loading API...</div> :
+              <div className="p-4 d-flex flex-wrap" style={{gap: '1rem'}}>
+                {this.state.mtPlanStats.map((planStat) => {
+                  return <button key={planStat.plan.mtPlanID} className="btn btn-outline-info"
+                                 onClick={() => this.shouldIBindThisInTypeScriptInReact(planStat)}>
+                    {planStat.plan.title}</button>
+                })}
+              </div>}
+        </>
+
+    );
+  }
+}
 
 export default Dashboard;

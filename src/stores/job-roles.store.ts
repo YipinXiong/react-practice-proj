@@ -8,6 +8,7 @@ export default class JobRolesStore {
   allJobRoles: JobRoleModel[] = [];
   rootStore: RootStore;
   httpClients: TransportInstances;
+  loading = true;
 
   constructor(_rootStore: RootStore, httpClients: TransportInstances) {
     makeObservable(this, {
@@ -15,6 +16,7 @@ export default class JobRolesStore {
       rootStore: false,
       fetchJobRoles: action,
       httpClients: false,
+      loading: observable,
     })
     this.httpClients = httpClients;
     this.rootStore = _rootStore;
@@ -29,6 +31,7 @@ export default class JobRolesStore {
         return [];
       });
       runInAction(() => {
+        this.loading = false;
         this.allJobRoles = allRawJobRoles;
       })
     }

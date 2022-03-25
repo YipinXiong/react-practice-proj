@@ -29,7 +29,8 @@ ReactDOM.render(
               <Route path="/login" element={<Login/>}/>
               <Route path="/" element={<RequireAuth><App/>
               </RequireAuth>}>
-                <Route index element={<Dashboard/>}/>
+                <Route index element={<InjectRootStoreRenderHoc
+                    renderWithStore={(store) => <Dashboard rootStore={store}/>}/>}/>
                 <Route path="compliance-plan" element={<CompliancePlan/>}/>
                 <Route path="admin-staff" element={<ConnectToStoreAdminStaffList/>}/>
                 <Route path="teams" element={<Outlet/>}>
