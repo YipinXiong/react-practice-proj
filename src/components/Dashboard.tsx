@@ -4,9 +4,9 @@ import {CACHE_ORG_ID_KEY} from '../apis/api-const-tokens';
 import {IMtPlanStat} from '../interfaces/interfaces.index';
 import RootStore from '@root-store';
 
-type Props = { rootStore: RootStore }
+export type Props = { rootStore: RootStore }
 
-interface IDashboardState {
+export interface IDashboardState {
   mtPlanStats: IMtPlanStat[];
   isLoading: boolean;
 }
@@ -19,10 +19,12 @@ class Dashboard extends PureComponent<Props, IDashboardState> {
 
   componentDidMount() {
     const orgID = localStorage.getItem(CACHE_ORG_ID_KEY);
-    accountApiInstance.get<IMtPlanStat[]>(`/orgs/${orgID}/mtPlanStats`)
-        .then(({data: mtPlansStats}) => {
-          this.setState({mtPlanStats: mtPlansStats, isLoading: false});
-        });
+    if (orgID) {
+      accountApiInstance.get<IMtPlanStat[]>(`/orgs/${orgID}/mtPlanStats`)
+          .then(({data: mtPlansStats}) => {
+            this.setState({mtPlanStats: mtPlansStats, isLoading: false});
+          });
+    }
   }
 
   shouldIBindThisInTypeScriptInReact(planStat: IMtPlanStat) {
@@ -36,7 +38,7 @@ class Dashboard extends PureComponent<Props, IDashboardState> {
   render() {
     return (
         <>
-          <div>
+          <div data-testid="dashboard-title">
             here is dashboard
           </div>
           {(this.state.isLoading || this.props.rootStore.jobRolesStore.loading) ?

@@ -15,7 +15,8 @@ const DashboardHeader: React.FC<Props> = ({toggleHamburger, currentHideHamburger
           <button onClick={(() => toggleHamburger(!currentHideHamburger))} className="btn btn-md d-md-none">
             <FontAwesomeIcon icon={faAlignJustify}/>
           </button>
-          <span className="pl-2 d-inline-block ms-md-3">Welcome to Yipin&apos;s practice</span>
+          <span data-testid="header-title"
+                className="pl-2 d-inline-block ms-md-3">Welcome to Yipin&apos;s practice</span>
         </div>
 
         <Link to={'/login'}>Login</Link>
