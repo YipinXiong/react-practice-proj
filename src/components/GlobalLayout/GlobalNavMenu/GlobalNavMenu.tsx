@@ -14,7 +14,7 @@ interface Props {
   setHideHamburgerMenu: (val: boolean) => void;
 }
 
-const DashboardNavBar: FC<Props> = ({setHideHamburgerMenu}) => {
+const GlobalNavMenu: FC<Props> = ({setHideHamburgerMenu}) => {
   const sidebarEntries: SidebarEntry[] = [{displayName: 'dashboard', route: '/'},
     {displayName: 'Administration', route: 'admin-staff'},
     {displayName: 'Teams', route: 'teams'},
@@ -39,4 +39,4 @@ const DashboardNavBar: FC<Props> = ({setHideHamburgerMenu}) => {
   );
 };
 
-export default DashboardNavBar;
+export default GlobalNavMenu;

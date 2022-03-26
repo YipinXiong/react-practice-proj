@@ -1,27 +1,59 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.scss';
-import DashboardHeader from './components/DashboardHeader';
-import DashboardNavBar from './components/DashboardNavbar';
-import {Outlet} from 'react-router-dom';
-
+import {BrowserRouter, Outlet, Route, Routes} from 'react-router-dom';
+import {RootStoreProvider} from './hooks/app-root-store.store';
+import {AuthProvider, RequireAuth} from './hooks/auth.hook';
+import Login from './components/Login';
+import InjectRootStoreRenderHoc from './hoc/InjectRootStoreRenderHoc';
+import Dashboard from './components/Dashboard/Dashboard';
+import CompliancePlan from './components/CompliancePlan';
+import ConnectToStoreAdminStaffList from './components/AdminStaff';
+import ConnectedToStoreTeamList from './components/TeamsList';
+import ConnectToStoreTeamDetailsPage from './components/TeamDetailsPage';
+import JobRolesList from './components/JobRolesList';
+import YourLibrary from './components/YourLibrary';
+import AusmedLibrary from './components/AusmedLibrary';
+import Reports from './components/Reports';
+import Settings from './components/Settings';
+import GlobalLayout from './components/GlobalLayout/GlobalLayout';
 
 function App() {
-  const [hideHamburgerMenu, setHideHamburgerMenu] = useState(true);
-  return (
-      <div className="d-flex flex-column overflow-hidden" style={{height: '100vh'}}>
-        <div className="global-header">
-          <DashboardHeader toggleHamburger={setHideHamburgerMenu} currentHideHamburger={hideHamburgerMenu}/>
-        </div>
-        <div className="d-flex position-relative global-content-wrapper">
-          <div
-              className={`global-nav-bar d-flex ${hideHamburgerMenu ? 'hide-hamburger-menu' : 'show-hamburger-menu'}`}>
-            <DashboardNavBar setHideHamburgerMenu={setHideHamburgerMenu}/>
-          </div>
-          <div className="global-content-area">
-            <Outlet/>
-          </div>
-        </div>
-      </div>);
+  return (<React.StrictMode>
+    <BrowserRouter>
+      <RootStoreProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/" element={<RequireAuth><GlobalLayout/>
+            </RequireAuth>}>
+              <Route index element={<InjectRootStoreRenderHoc
+                  renderWithStore={(store) => <Dashboard rootStore={store}/>}/>}/>
+              <Route path="compliance-plan" element={<CompliancePlan/>}/>
+              <Route path="admin-staff" element={<ConnectToStoreAdminStaffList/>}/>
+              <Route path="teams" element={<Outlet/>}>
+                <Route index element={<ConnectedToStoreTeamList/>}/>
+                <Route path=":teamID" element={<ConnectToStoreTeamDetailsPage/>}/>
+              </Route>
+              <Route path="job-roles"
+                     element={<InjectRootStoreRenderHoc
+                         renderWithStore={(store) => <JobRolesList rootStore={store}/>}/>}>
+              </Route>
+              <Route path="your-library" element={<YourLibrary/>}/>
+              <Route path="ausmed-library" element={<AusmedLibrary/>}/>
+              <Route path="reports" element={<Reports/>}/>
+              <Route path="settings" element={<Settings/>}/>
+            </Route>
+            <Route path="*" element={
+              <main style={{padding: "1rem"}}>
+                <p>There is nothing here!</p>
+              </main>
+            }
+            />
+          </Routes>
+        </AuthProvider>
+      </RootStoreProvider>
+    </BrowserRouter>
+  </React.StrictMode>)
 }
 
 export default App;

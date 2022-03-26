@@ -8,7 +8,7 @@ interface Props {
   toggleHamburger: (param: boolean) => void;
 }
 
-const DashboardHeader: React.FC<Props> = ({toggleHamburger, currentHideHamburger}: Props): React.ReactElement => {
+const GlobalHeader: React.FC<Props> = ({toggleHamburger, currentHideHamburger}: Props): React.ReactElement => {
   return (
       <header className="d-flex border-bottom w-100 align-items-center justify-content-between">
         <div className="d-flex gap-2 align-items-center">
@@ -24,4 +24,4 @@ const DashboardHeader: React.FC<Props> = ({toggleHamburger, currentHideHamburger
   );
 }
 
-export default DashboardHeader;
+export default GlobalHeader;

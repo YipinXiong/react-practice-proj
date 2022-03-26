@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
-import accountApiInstance from '../apis/account-api-instance';
-import {CACHE_ORG_ID_KEY} from '../apis/api-const-tokens';
-import {IMtPlanStat} from '../interfaces/interfaces.index';
+import accountApiInstance from '../../apis/account-api-instance';
+import {CACHE_ORG_ID_KEY} from '../../apis/api-const-tokens';
+import {IMtPlanStat} from '../../interfaces/interfaces.index';
 import RootStore from '@root-store';
 
 export type Props = { rootStore: RootStore }
