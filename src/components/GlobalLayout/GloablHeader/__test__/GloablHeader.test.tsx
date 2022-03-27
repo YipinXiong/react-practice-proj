@@ -1,5 +1,5 @@
 import {render, screen} from '@testing-library/react';
-import GlobalHeader from './GlobalHeader';
+import GlobalHeader from '../GlobalHeader';
 import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 

@@ -19,12 +19,10 @@ class Dashboard extends PureComponent<Props, IDashboardState> {
 
   componentDidMount() {
     const orgID = localStorage.getItem(CACHE_ORG_ID_KEY);
-    if (orgID) {
-      accountApiInstance.get<IMtPlanStat[]>(`/orgs/${orgID}/mtPlanStats`)
-          .then(({data: mtPlansStats}) => {
-            this.setState({mtPlanStats: mtPlansStats, isLoading: false});
-          });
-    }
+    accountApiInstance.get<IMtPlanStat[]>(`/orgs/${orgID}/mtPlanStats`)
+        .then(({data: mtPlansStats}) => {
+          this.setState({mtPlanStats: mtPlansStats, isLoading: false});
+        });
   }
 
   shouldIBindThisInTypeScriptInReact(planStat: IMtPlanStat) {
@@ -38,12 +36,12 @@ class Dashboard extends PureComponent<Props, IDashboardState> {
   render() {
     return (
         <>
-          <div data-testid="dashboard-title">
+          <h2>
             here is dashboard
-          </div>
+          </h2>
           {(this.state.isLoading || this.props.rootStore.jobRolesStore.loading) ?
               <div className="text-danger fw-bold">Loading API...</div> :
-              <div className="p-4 d-flex flex-wrap" style={{gap: '1rem'}}>
+              <div data-testid="btn-wrapper" className="p-4 d-flex flex-wrap" style={{gap: '1rem'}}>
                 {this.state.mtPlanStats.map((planStat) => {
                   return <button key={planStat.plan.mtPlanID} className="btn btn-outline-info"
                                  onClick={() => this.shouldIBindThisInTypeScriptInReact(planStat)}>

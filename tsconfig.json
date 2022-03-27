@@ -28,6 +28,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "./jest-setup.ts"
+    // In tsconfig.json
   ]
 }
