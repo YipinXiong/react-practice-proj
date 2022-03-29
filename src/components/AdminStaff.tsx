@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {observer} from 'mobx-react';
-import RootStore from '../stores/root.store';
+import RootStore from '@root-store';
 import withRootStore from '../hoc/withRootStoreHOC';
 
 const AdminStaffList = observer<FC<{ rootStore: RootStore }>>(({rootStore}) => {

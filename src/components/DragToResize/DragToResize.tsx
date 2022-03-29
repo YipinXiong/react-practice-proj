@@ -1,18 +1,19 @@
-import React, {useRef, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 
-const YourLibrary = () => {
+const DragToResize = () => {
   const [leftWidth, setLeftWidth] = useState('50%');
   const resizeParentRef = useRef<HTMLDivElement>(null);
-  const onMouseMove = (e: MouseEvent) => {
-    const finalWidth = e.clientX - 200;
-    setLeftWidth(`${finalWidth}px`)
-  };
-  const onMouseDownHandler = () => {
-    resizeParentRef?.current?.addEventListener('mousemove', onMouseMove);
+  const onMouseDownHandler = useCallback(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      const NAV_MENU_WIDTH = 200;
+      const finalWidth = e.clientX - NAV_MENU_WIDTH;
+      setLeftWidth(`${finalWidth}px`)
+    };
     document.addEventListener('mouseup', () => {
       resizeParentRef?.current?.removeEventListener('mousemove', onMouseMove);
     })
-  };
+    resizeParentRef?.current?.addEventListener('mousemove', onMouseMove);
+  }, []);
   return (
       <div ref={resizeParentRef} className="d-flex" style={{height: '100%'}}>
         <div className="border-end position-relative" style={{width: leftWidth, background: 'red'}}>
@@ -21,7 +22,6 @@ const YourLibrary = () => {
                  top: 0,
                  right: 0,
                  bottom: 0,
-                 height: '100%',
                  width: '10px',
                  backgroundColor: 'blue',
                  cursor: 'ew-resize'
@@ -33,4 +33,4 @@ const YourLibrary = () => {
   );
 };
 
-export default YourLibrary;
+export default DragToResize;

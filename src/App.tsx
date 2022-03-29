@@ -11,7 +11,7 @@ import ConnectToStoreAdminStaffList from './components/AdminStaff';
 import ConnectedToStoreTeamList from './components/TeamsList';
 import ConnectToStoreTeamDetailsPage from './components/TeamDetailsPage';
 import JobRolesList from './components/JobRolesList';
-import YourLibrary from './components/YourLibrary';
+import DragToResize from './components/DragToResize/DragToResize';
 import AusmedLibrary from './components/AusmedLibrary';
 import Reports from './components/Reports';
 import Settings from './components/Settings';
@@ -38,7 +38,7 @@ function App() {
                      element={<InjectRootStoreRenderHoc
                          renderWithStore={(store) => <JobRolesList rootStore={store}/>}/>}>
               </Route>
-              <Route path="your-library" element={<YourLibrary/>}/>
+              <Route path="drag-to-resize" element={<DragToResize/>}/>
               <Route path="ausmed-library" element={<AusmedLibrary/>}/>
               <Route path="reports" element={<Reports/>}/>
               <Route path="settings" element={<Settings/>}/>

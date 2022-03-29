@@ -21,7 +21,7 @@ const GlobalNavMenu: FC<Props> = ({setHideHamburgerMenu}) => {
     {displayName: 'Job Roles', route: 'job-roles'},
     {displayName: 'Compliance', route: 'compliance-plan'},
     {displayName: 'Your Library', route: 'your-library'},
-    {displayName: 'Ausmed Library', route: 'ausmed-library'},
+    {displayName: 'Drag to resize', route: 'drag-to-resize'},
     {displayName: 'Reporting', route: 'reports'},
     {displayName: 'Settings', route: 'settings'}];
   return (
