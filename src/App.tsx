@@ -12,7 +12,7 @@ import ConnectedToStoreTeamList from './components/TeamsList';
 import ConnectToStoreTeamDetailsPage from './components/TeamDetailsPage';
 import JobRolesList from './components/JobRolesList';
 import DragToResize from './components/DragToResize/DragToResize';
-import AusmedLibrary from './components/AusmedLibrary';
+import FlexLayoutDemo from './components/FlexLayoutDemo/FlexLayoutDemo';
 import Reports from './components/Reports';
 import Settings from './components/Settings';
 import GlobalLayout from './components/GlobalLayout/GlobalLayout';
@@ -39,7 +39,7 @@ function App() {
                          renderWithStore={(store) => <JobRolesList rootStore={store}/>}/>}>
               </Route>
               <Route path="drag-to-resize" element={<DragToResize/>}/>
-              <Route path="ausmed-library" element={<AusmedLibrary/>}/>
+              <Route path="flex-box" element={<FlexLayoutDemo/>}/>
               <Route path="reports" element={<Reports/>}/>
               <Route path="settings" element={<Settings/>}/>
             </Route>
