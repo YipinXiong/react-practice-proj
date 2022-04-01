@@ -39,7 +39,7 @@ class Dashboard extends PureComponent<Props, IDashboardState> {
           <h2>
             here is dashboard
           </h2>
-          {(this.state.isLoading || this.props.rootStore.jobRolesStore.loading) ?
+          {this.state.isLoading ?
               <div className="text-danger fw-bold">Loading API...</div> :
               <div data-testid="btn-wrapper" className="p-4 d-flex flex-wrap" style={{gap: '1rem'}}>
                 {this.state.mtPlanStats.map((planStat) => {

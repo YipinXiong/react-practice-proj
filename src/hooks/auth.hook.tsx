@@ -32,9 +32,11 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     singletonOrgUserService.signin(loginForm).then((initPayload) => {
       setInitPayload(initPayload ? initPayload : null);
       rootStore.signInUserStore.setInitPayload(initPayload as InitPayload);
+      rootStore.orgUserStore.fetchAllOrgUsers();
+      rootStore.teamsStore.fetchAllTeams();
+      rootStore.jobRolesStore.fetchJobRoles();
       callBack && callBack();
     })
-    rootStore.orgUserStore.fetchAllOrgUsers();
   };
   const signout = () => {
     singletonOrgUserService.signout();
