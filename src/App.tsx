@@ -13,7 +13,7 @@ import ConnectToStoreTeamDetailsPage from './components/TeamDetailsPage';
 import JobRolesList from './components/JobRolesList';
 import DragToResize from './components/DragToResize/DragToResize';
 import FlexLayoutDemo from './components/FlexLayoutDemo/FlexLayoutDemo';
-import Reports from './components/Reports';
+import DragToResizeAndMove from './components/DragToResizeAndMove/DragToResizeAndMove';
 import Settings from './components/Settings';
 import GlobalLayout from './components/GlobalLayout/GlobalLayout';
 
@@ -40,7 +40,7 @@ function App() {
                             </Route>
                             <Route path="drag-to-resize" element={<DragToResize/>}/>
                             <Route path="flex-box" element={<FlexLayoutDemo/>}/>
-                            <Route path="drag-move-resize" element={<Reports/>}/>
+                            <Route path="drag-move-resize" element={<DragToResizeAndMove/>}/>
                             <Route path="settings" element={<Settings/>}/>
                         </Route>
                         <Route path="*" element={

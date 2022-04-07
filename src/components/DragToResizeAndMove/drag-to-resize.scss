@@ -1,0 +1,19 @@
+.move-container {
+  position: relative;
+  top: 10%;
+  left: 10%;
+  height: 80%;
+  width: 80%;
+  background: dimgrey;
+  outline: grey dashed 2px;
+}
+
+.drag-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  &:hover {
+    border: 2px solid cadetblue;
+  }
+}
