@@ -17,3 +17,22 @@
     border: 2px solid cadetblue;
   }
 }
+
+
+.rotate-container {
+  position: relative;
+
+  &:hover .rotate-point {
+    display: block !important;
+  }
+}
+
+.rotate-point {
+  display: none;
+  bottom: 10px;
+  height: 10px;
+  width: 10px;
+  left: 10px;
+  position: absolute;
+  background: aqua;
+}
